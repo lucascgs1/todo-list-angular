@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12 col-md-3 offset-md-9 my-3 ">
+    <button mat-raised-button color="primary" class="w-100" routerLink="/novo">Nova tarefa</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <app-todo-list [data]="taskList" [columns]="displayedColumnsList" (taskStatus)="changeTaskStatus($event)">
+    </app-todo-list>
+  </div>
+
+  <div class="my-4 mt-4  col-10 offset-1 text-center divider" *ngIf="taskCompleteList.length > 0">
+  </div>
+
+  <div class="col-12">
+    <app-todo-list [data]="taskCompleteList" [columns]="displayedColumnsList" [show-header]="false"
+      (taskStatus)="changeTaskStatus($event)" (deleteTask)="removeTask($event);"></app-todo-list>
+  </div>
+</div>

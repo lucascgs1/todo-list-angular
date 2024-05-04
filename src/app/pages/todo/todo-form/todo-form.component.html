@@ -1,0 +1,49 @@
+<div class="row mt-5 mb-3">
+  <div class="col-12 col-md-9">
+    <h1>Nova Tarefa</h1>
+  </div>
+
+</div>
+
+<form [formGroup]="todoForm" (ngSubmit)="onTaskSubmit()">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3 mb-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <input matInput placeholder="Eu preciso fazer..." formControlName="description" />
+        <mat-error class="mb-2"
+          *ngIf="todoForm.get('description')?.invalid && (todoForm.get('description')?.dirty || todoForm.get('description')?.touched)">
+          <span *ngIf="todoForm.get('description')?.errors?.['required']">Descrição é obrigaria.</span>
+          <span *ngIf="todoForm.get('description')?.errors?.['minlength']">Descrição deve conter ao menos 6
+            caracteres</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-md-6 offset-md-3 mb-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Selecione a prioridade</mat-label>
+        <mat-select placeholder="Selecione a prioridade" formControlName="priority">
+          <mat-option *ngFor="let priority of priorityList" [value]="priority.value">
+            {{priority.label}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="mb-2"
+          *ngIf="todoForm.get('priority')?.invalid && (todoForm.get('priority')?.dirty || todoForm.get('priority')?.touched)">
+          <span *ngIf="todoForm.get('priority')?.errors?.['required']">Descrição é obrigaria.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-3 offset-md-3 ">
+      <button mat-raised-button class="w-100" routerLink="/">Voltar</button>
+    </div>
+
+    <div class="col-12 col-md-3">
+      <button mat-raised-button color="primary" [disabled]="todoForm.invalid" class="w-100" type="submit">Salvar nova
+        tarefa</button>
+    </div>
+  </div>
+</form>
